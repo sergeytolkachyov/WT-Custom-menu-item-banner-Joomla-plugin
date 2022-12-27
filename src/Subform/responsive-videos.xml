@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form class="d-block">
+	<fieldset name="responsive_videos_files_fieldset">
+	<field name="video"
+		   type="media"
+		   types="videos"
+		   preview="false"
+		   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_VIDEO_FILE"/>
+	<field type="media"
+		   name="link_video_poster"
+		   types="images"
+		   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_VIDEO_FILE_POSTER"
+		   preview="true"/>
+	</fieldset>
+	<fieldset name="responsive_videos_media_query_fieldset">
+	<field type="text"
+		   name="media_query"
+		   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_RESPONSIVE_VIDEOS_MEDIA_QUERY"
+		   hint="(max-width: 767px)"
+		   description="(max-width: 767px)"/>
+	</fieldset>
+</form>

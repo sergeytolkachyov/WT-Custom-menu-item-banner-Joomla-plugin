@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form class="d-block">
+	<field name="image"
+		   type="media"
+		   types="images"
+		   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_RESPONSIVE_IMAGES_IMAGE"/>
+	<field type="text"
+		   name="media_query"
+		   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_RESPONSIVE_IMAGES_MEDIA_QUERY"
+		   hint="(max-width: 767px)"
+		   description="(max-width: 767px)"/>
+</form>
