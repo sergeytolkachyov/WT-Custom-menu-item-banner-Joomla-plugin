@@ -1,11 +1,11 @@
 # WT Custom menu item banner Joomla plugin
-Custom banners for Joomla menu items like Louis Vuitton website v. Adaptive images and adaptive image videos. For output, use the sample code.
+Custom banners for Joomla menu items like Louis Vuitton website. Responsive images and videos. For output, use the sample code.
 ### Demo video (Russian language)
 [![](https://img.youtube.com/vi/9n15dZML-Qc/0.jpg)](https://www.youtube.com/watch?v=9n15dZML-Qc)
 ## Please note!
 Plugin - does not provide a 1 click solution. You make up the banner output yourself! Carefully study the sample code below.
 # Plugin features
-- Adaptability of both images and videos is supported. For desktops (desktops, laptops, TV), specify the image in horizontal orientation. For mobile devices - vertical.
+- Responsive both images and videos is supported. For desktops (desktops, laptops, TV), specify the image in horizontal orientation. For mobile devices - vertical.
 - You can specify any number of breakpoints (ranges of screen resolutions for which a particular image or video is used). The CSS syntax of @media queries is used.
 - Lazy loading of video files for adaptive video banners. The Js script checks whether the specified videos correspond to the screen parameters and loads the desired one.
 # Preparing images for image banners
