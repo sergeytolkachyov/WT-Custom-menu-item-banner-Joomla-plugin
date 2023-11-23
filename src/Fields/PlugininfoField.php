@@ -1,11 +1,11 @@
 <?php
 /**
- * @package       WT Custom menu item banner
- * @version       2.3.0
+ * @package       WT SEO Meta templates
+ * @version       1.1.0
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
- * @copyright     Copyright (C) 2020 Sergey Tolkachyov
- * @license       GNU/GPL http://www.gnu.org/licenses/gpl-2.0.html
- * @since         2.3.0
+ * @copyright     Copyright (C) 2023 Sergey Tolkachyov
+ * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
+ * @since         1.0.0
  */
 
 namespace Joomla\Plugin\System\Wt_custom_menu_item_banner\Fields;

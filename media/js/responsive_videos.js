@@ -1,3 +1,11 @@
+/**
+ * @package       WT SEO Meta templates
+ * @version       1.1.0
+ * @Author        Sergey Tolkachyov, https://web-tolk.ru
+ * @copyright     Copyright (C) 2023 Sergey Tolkachyov
+ * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
+ * @since         1.0.0
+ */
 document.addEventListener('DOMContentLoaded', function () {
 	let wt_custom_menu_item_banner_responsive_videos = Joomla.getOptions('wt_custom_menu_item_banner_responsive_videos');
 	if (wt_custom_menu_item_banner_responsive_videos) {

@@ -1,11 +1,11 @@
 <?php
 /**
- * @package     WT Custom menu item banner
- * @version     1.0.0
- * @Author      Sergey Tolkachyov, https://web-tolk.ru
- * @copyright   Copyright (C) 2022 Sergey Tolkachyov
- * @license     GNU/GPL http://www.gnu.org/licenses/gpl-2.0.html
- * @since       1.0.0
+ * @package       WT SEO Meta templates
+ * @version       1.1.0
+ * @Author        Sergey Tolkachyov, https://web-tolk.ru
+ * @copyright     Copyright (C) 2023 Sergey Tolkachyov
+ * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
+ * @since         1.0.0
  */
 
 // No direct access
@@ -15,14 +15,35 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Factory;
+use Joomla\Event\SubscriberInterface;
 
-class Wt_custom_menu_item_banner extends CMSPlugin
+class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterface
 {
 	protected $autoloadLanguage = true;
+	protected $allowLegacyListeners = false;
 
-	public function onContentPrepareForm($form, $data)
+	/**
+	 *
+	 * @return array
+	 *
+	 * @throws \Exception
+	 * @since 4.1.0
+	 *
+	 */
+	public static function getSubscribedEvents(): array
 	{
-		$app = Factory::getApplication();
+		return [
+			'onContentPrepareForm' => 'onContentPrepareForm',
+			'onAfterRender' => 'onAfterRender',
+		];
+	}
+
+	public function onContentPrepareForm($event) : void
+	{
+		$form = $event->getAttribute(0);
+		$data = $event->getAttribute(1);
+
+		$app = $this->getApplication();
 
 		if (!$app->isClient('administrator'))
 		{
@@ -39,13 +60,11 @@ class Wt_custom_menu_item_banner extends CMSPlugin
 		Form::addFormPath(JPATH_SITE . '/plugins/system/wt_custom_menu_item_banner/src/Subform');
 		$form->loadFile('fields', false);
 
-		$lang      = Factory::getApplication()->getLanguage();
+		$lang      = $app->getLanguage();
 		$extension = 'plg_system_wt_custom_menu_item_banner';
 		$base_dir  = JPATH_ADMINISTRATOR;
 		$reload    = true;
 		$lang->load($extension, $base_dir, $lang->getTag(), $reload);
-
-		return true;
 	}
 
 	/**
@@ -54,9 +73,9 @@ class Wt_custom_menu_item_banner extends CMSPlugin
 	 * @throws \Exception
 	 * @since 1.0.0
 	 */
-	public function onBeforeCompileHead()
+	public function onBeforeCompileHead($event) : void
 	{
-		$app = Factory::getApplication();
+		$app = $this->getApplication();
 		if (!($app->isClient('site')))
 		{
 			return;
@@ -77,7 +96,6 @@ class Wt_custom_menu_item_banner extends CMSPlugin
 		 */
 		if ($wt_custom_menu_item_banner->media_type == 'video' && $wt_custom_menu_item_banner->is_responsive_videos == 1)
 		{
-
 			$doc->addScriptOptions('wt_custom_menu_item_banner_responsive_videos', $wt_custom_menu_item_banner->responsive_videos);
 			$doc->getWebAssetManager()->useScript('core')
 				->registerAndUseScript('wt_custom_menu_item_banner.responsive_videos', 'plg_system_wt_custom_menu_item_banner/responsive_videos.js', ['relative' => true, 'version' => 'auto']);

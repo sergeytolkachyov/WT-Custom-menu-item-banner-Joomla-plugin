@@ -1,7 +1,7 @@
 <?php
 /**
  * @package       WT SEO Meta templates
- * @version       2.0.3
+ * @version       1.1.0
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
  * @copyright     Copyright (C) 2023 Sergey Tolkachyov
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
@@ -176,7 +176,7 @@ return new class () implements ServiceProviderInterface {
 
 				$html = '
 				<div class="row bg-white m-0">
-				<div class="col-12 col-md-8 p-0 pe-2">
+				<div class="col-12 col-md-8 col-xl-9 p-0 pe-2">
 				<h2>' . $smile . ' ' . Text::_($element . '_AFTER_' . $type) . ' <br/>' . Text::_($element) . '</h2>
 				' . Text::_($element . '_DESC');
 
