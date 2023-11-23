@@ -27,10 +27,9 @@
 		<language tag="ru-RU">ru-RU/plg_system_wt_custom_menu_item_banner.sys.ini</language>
 	</languages>
 	<updateservers>
-		<server type="extension" name="Web Tolk Update Server - WT Custom menu item banner">
-			https://web-tolk.ru/component/swjprojects/jupdate.html?element=wt_custom_menu_item_banner
-		</server>
+		<server type="extension" priority="1" name="WT Custom menu item banner updates">https://web-tolk.ru/component/swjprojects/jupdate?element=wt_custom_menu_item_banner</server>
 	</updateservers>
+	<changelogurl>https://web-tolk.ru/jchangelog?element=wt_custom_menu_item_banner</changelogurl>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
