@@ -34,7 +34,7 @@ class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterfac
 	{
 		return [
 			'onContentPrepareForm' => 'onContentPrepareForm',
-			'onAfterRender' => 'onAfterRender',
+			'onBeforeCompileHead' => 'onBeforeCompileHead',
 		];
 	}
 
