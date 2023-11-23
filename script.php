@@ -176,14 +176,14 @@ return new class () implements ServiceProviderInterface {
 
 				$html = '
 				<div class="row bg-white m-0">
-				<div class="col-12 col-md-8 col-xl-9 p-0 pe-2">
+				<div class="col-12 col-md-8 p-0 pe-2">
 				<h2>' . $smile . ' ' . Text::_($element . '_AFTER_' . $type) . ' <br/>' . Text::_($element) . '</h2>
 				' . Text::_($element . '_DESC');
 
 				$html .= Text::_($element . '_WHATS_NEW');
 
 				$html .= '</div>
-				<div class="col-12 col-md-4 col-xl-3 p-0 d-flex flex-column justify-content-start">
+				<div class="col-12 col-md-4 p-0 d-flex flex-column justify-content-start">
 				<img width="180" src="https://web-tolk.ru/web_tolk_logo_wide.png">
 				<p>Joomla Extensions</p>
 				<p class="btn-group">
