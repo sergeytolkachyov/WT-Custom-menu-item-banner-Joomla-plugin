@@ -40,8 +40,8 @@ class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterfac
 
 	public function onContentPrepareForm($event) : void
 	{
-		$form = $event->getAttribute(0);
-		$data = $event->getAttribute(1);
+		$form = $event->getArgument(0);
+		$data = $event->getArgument(1);
 
 		$app = $this->getApplication();
 
