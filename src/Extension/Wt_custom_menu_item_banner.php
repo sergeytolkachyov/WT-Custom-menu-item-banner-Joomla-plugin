@@ -1,7 +1,7 @@
 <?php
 /**
- * @package       WT SEO Meta templates
- * @version       1.0.1
+ * @package    System - WT Custom menu item banner
+ * @version       1.1.0
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
  * @copyright     Copyright (C) 2023 Sergey Tolkachyov
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
@@ -86,19 +86,29 @@ class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterfac
 		{
 			return;
 		}
-		$wt_custom_menu_item_banner = $app->getMenu()->getActive()->getParams()->get('wt_custom_menu_item_banner');
-		if (!$wt_custom_menu_item_banner)
-		{
-			return;
-		}
-		/**
-		 * Use js script only for responsive videos
-		 */
-		if ($wt_custom_menu_item_banner->media_type == 'video' && $wt_custom_menu_item_banner->is_responsive_videos == 1)
-		{
-			$doc->addScriptOptions('wt_custom_menu_item_banner_responsive_videos', $wt_custom_menu_item_banner->responsive_videos);
-			$doc->getWebAssetManager()->useScript('core')
-				->registerAndUseScript('wt_custom_menu_item_banner.responsive_videos', 'plg_system_wt_custom_menu_item_banner/responsive_videos.js', ['relative' => true, 'version' => 'auto']);
+
+		try{
+			$menu = $app->getMenu()->getActive();
+			if($menu)
+			{
+				$wt_custom_menu_item_banner = $menu->getParams()->get('wt_custom_menu_item_banner');
+				if (!$wt_custom_menu_item_banner)
+				{
+					return;
+				}
+				/**
+				 * Use js script only for responsive videos
+				 */
+				if ($wt_custom_menu_item_banner->media_type == 'video' && $wt_custom_menu_item_banner->is_responsive_videos == 1)
+				{
+					$doc->addScriptOptions('wt_custom_menu_item_banner_responsive_videos', $wt_custom_menu_item_banner->responsive_videos);
+					$doc->getWebAssetManager()->useScript('core')
+						->registerAndUseScript('wt_custom_menu_item_banner.responsive_videos', 'plg_system_wt_custom_menu_item_banner/responsive_videos.js', ['relative' => true, 'version' => 'auto']);
+				}
+			}
+
+		} catch (\Exception $e) {
+			Factory::getApplication()->enqueueMessage($e->getMessage(),'error');
 		}
 	}
 }

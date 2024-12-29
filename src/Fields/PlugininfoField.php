@@ -1,9 +1,9 @@
 <?php
 /**
- * @package       WT SEO Meta templates
- * @version       1.0.1
+ * @package    System - WT Custom menu item banner
+ * @version       1.1.0
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
- * @copyright     Copyright (C) 2023 Sergey Tolkachyov
+ * @copyright     Copyright (C) 2022-2024 Sergey Tolkachyov
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
  * @since         1.0.0
  */
