@@ -16,6 +16,16 @@
 					   description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_LINK_TYPE_CUSTOM_LINK_DESC"
 					   filter="safehtml"
 				/>
+				<field type="filelist"
+					   name="pluginlayout"
+					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_PLUGIN_LAYOUT"
+					   description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_PLUGIN_LAYOUT_DESC"
+					   directory="plugins/system/wt_custom_menu_item_banner/tmpl"
+					   fileFilter="php"
+					   stripext="true"
+					   hide_none="true"
+					   hide_default="true"
+				/>
 				<field type="radio"
 					   name="media_type"
 					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_MEDIA_TYPE"

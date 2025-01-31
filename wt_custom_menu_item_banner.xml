@@ -4,10 +4,10 @@
 	<author>Sergey Tolkachyov</author>
 	<authorEmail>info@web-tolk.ru</authorEmail>
 	<authorUrl>https://web-tolk.ru</authorUrl>
-	<creationDate>29.12.2024</creationDate>
-	<copyright>Copyright (c) 2022 - 2024 Sergey Tolkachyov. All rights reserved.</copyright>
+	<creationDate>31.01.2025</creationDate>
+	<copyright>Copyright (c) 2022 - 2025 Sergey Tolkachyov. All rights reserved.</copyright>
 	<license>GNU General Public License v3.0</license>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<description>PLG_WT_CUSTOM_MENU_ITEM_BANNER_DESC</description>
 	<namespace path="src">Joomla\Plugin\System\Wt_custom_menu_item_banner</namespace>
 	<scriptfile>script.php</scriptfile>

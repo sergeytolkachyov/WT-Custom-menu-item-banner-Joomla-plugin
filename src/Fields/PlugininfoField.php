@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    System - WT Custom menu item banner
- * @version       1.1.0
+ * @version       1.2.0
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
  * @copyright     Copyright (C) 2022-2024 Sergey Tolkachyov
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
@@ -9,13 +9,13 @@
  */
 
 namespace Joomla\Plugin\System\Wt_custom_menu_item_banner\Fields;
-defined('_JEXEC') or die;
 
 use Joomla\CMS\Form\Field\NoteField;
-use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Language\Text;
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Factory;
+use function defined;
 
+defined('_JEXEC') or die;
 
 class PlugininfoField extends NoteField
 {
@@ -99,5 +99,3 @@ class PlugininfoField extends NoteField
 	}
 
 }
-
-?>

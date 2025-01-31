@@ -1,26 +1,26 @@
 <?php
 /**
  * @package    System - WT Custom menu item banner
- * @version       1.1.0
+ * @version       1.2.0
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
  * @copyright     Copyright (C) 2023 Sergey Tolkachyov
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
  * @since         1.0.0
  */
 
-// No direct access
 namespace Joomla\Plugin\System\Wt_custom_menu_item_banner\Extension;
-defined('_JEXEC') or die;
 
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Factory;
 use Joomla\Event\SubscriberInterface;
+use function defined;
+
+defined('_JEXEC') or die;
 
 class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterface
 {
 	protected $autoloadLanguage = true;
-	protected $allowLegacyListeners = false;
 
 	/**
 	 *

@@ -1,14 +1,12 @@
 <?php
 /**
  * @package    System - WT Custom menu item banner
- * @version       1.1.0
+ * @version       1.2.0
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
  * @copyright     Copyright (C) 2022 - 2024 Sergey Tolkachyov
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
  * @since         1.0.0
  */
-
-\defined('_JEXEC') or die;
 
 use Joomla\CMS\Application\AdministratorApplication;
 use Joomla\CMS\Factory;
@@ -19,6 +17,8 @@ use Joomla\CMS\Version;
 use Joomla\Database\DatabaseDriver;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
+
+defined('_JEXEC') or die;
 
 return new class () implements ServiceProviderInterface {
 	public function register(Container $container)
