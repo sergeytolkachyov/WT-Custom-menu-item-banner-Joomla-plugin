@@ -49,139 +49,22 @@ $wt_custom_menu_item_banner = $menu->getParams()->get('wt_custom_menu_item_banne
 /**
  * If there are parameters, output the following code
  */
-if ($wt_custom_menu_item_banner) :?>
-	<?php
+$wt_custom_menu_item_banner = $menu->getParams()->get('wt_custom_menu_item_banner');
+/**
+ * The "Use banner" button from menu item params
+ */
+$useBanner = $wt_custom_menu_item_banner->use_banner ?? false;
+if($wt_custom_menu_item_banner && $useBanner)
+{
+    echo \Joomla\CMS\Layout\LayoutHelper::render(
+        ($wt_custom_menu_item_banner?->pluginlayout ?? 'default'),
+        [
+            'wt_custom_menu_item_banner' => $wt_custom_menu_item_banner,
+            'menu' => $menu,
+            'useBanner' => $useBanner,
+        ],
+        JPATH_SITE.'/plugins/system/wt_custom_menu_item_banner/tmpl'
+    );
+}
 
-	/**
-	 * These css can be moved to a css file and not specified here.
-	 * In this case, this css code will be output inline
-	 */
-	$wt_custom_menu_item_banner_css = '
-		.wt_custom_menu_item_banner {
-		position: absolute;top: 30%;left: 50%;z-index: 2;color: #fff;-webkit-transform: translateX(-50%) translateY(-50%);transform: translateX(-50%) translateY(-50%);pointer-events: none;
-		}
-		';
-	$wa->addInlineStyle($wt_custom_menu_item_banner_css);
-
-	?>
-
-	<section class="container-fluid container-xxl">
-		<div class="row">
-			<div class="col-12 p-0 position-relative">
-				<div class="position-absolute bg-dark opacity-50 w-100 h-100" style="z-index: 1;"></div>
-				<div class="wt_custom_menu_item_banner d-flex flex-column align-items-center">
-
-					<img src="media/templates/site/webtolk/images/logo.svg" width="300" height="100"
-						 alt="YOUR LOGO IMAGE ALT"/>
-					<?php
-
-					/**
-					 * Banner header output. You are free to change this code to suit your needs and tasks.
-					 * If the menu item settings use
-					 * "Page - Title on page" - Show
-					 * if the "Page title" is specified, then it is displayed.
-					 * If not specified, we display the name of the menu item.
-					 */
-
-					if ($menu->getParams()->get('show_page_heading') == 1) : ?>
-						<?php
-						if (!empty($menu->getParams()->get('page_heading')))
-						{
-							$h1 = $menu->getParams()->get('page_heading');
-						}
-						else
-						{
-							$h1 = $menu->title;
-						}
-						?>
-						<h1 class="text-white text-uppercase fw-bold text-center">(<?php echo $h1; ?>)</h1>
-					<?php endif; ?>
-				</div>
-				<?php
-				/**
-				 * Banner image type
-				 */
-				if ($wt_custom_menu_item_banner->media_type == 'image'):
-					/**
-					 * Use HTML5 picture tag for responsive images
-					 */
-					if ($wt_custom_menu_item_banner->responsive_images && count((array) $wt_custom_menu_item_banner->responsive_images) > 0) : ?>
-
-						<picture>
-						<?php
-
-						foreach ($wt_custom_menu_item_banner->responsive_images as $responsive_image):
-							$clean_image_path = HTMLHelper::cleanImageURL($responsive_image->image);
-							$clean_image_path = $clean_image_path->url;
-
-							?>
-							<source srcset="<?php echo $clean_image_path; ?>"
-									media="<?php echo $responsive_image->media_query; ?>">
-
-						<?php endforeach; ?>
-					<?php endif; ?>
-					<?php
-
-					$clean_image_path                        = HTMLHelper::cleanImageURL($wt_custom_menu_item_banner->link_image);
-					$clean_image_path->attributes['class']   = 'w-100 h-auto';
-					$clean_image_path->attributes['loading'] = 'lazy';
-					echo HTMLHelper::image($clean_image_path->url, $wt_custom_menu_item_banner->link_text, $clean_image_path->attributes);
-					// Use HTML5 picture tag for responsive images - Close picture tag
-					if ($wt_custom_menu_item_banner->responsive_images && count((array) $wt_custom_menu_item_banner->responsive_images) > 0) : ?>
-						</picture>
-
-					<?php endif; ?>
-				<?php elseif ($wt_custom_menu_item_banner->media_type == 'video'):
-					/**
-					 * Banner type - video.
-					 * The video tag must have id="wt-custom-menu-item-banner-responsive-video"
-					 * The js script for lazy file loading is guided by it
-					 *
-					 * CSS classes and other HTML code you are free to change to suit your needs and tasks
-					 */
-					?>
-
-					<?php if ($wt_custom_menu_item_banner->is_responsive_videos == 1) :
-					/**
-					 * Adaptive videos are included. Therefore attributes
-					 * poster and src are empty. They are filled with a js script.
-					 */
-
-					?>
-					<video id="wt-custom-menu-item-banner-responsive-video"
-						   poster=""
-						   src=""
-						   class="card-img"
-						   autoplay="autoplay"
-						   muted="muted" loop="loop" style="border-radius: 0rem;">
-					</video>
-				<?php else :
-					/**
-					 * Responsive videos are not used. We output the video immediately.
-					 */
-					?>
-					<video id="wt-custom-menu-item-banner-responsive-video" <?php echo($wt_custom_menu_item_banner->link_video_poster ? 'poster="' . $wt_custom_menu_item_banner->link_video_poster . '"' : ''); ?>
-						   src="<?php echo $wt_custom_menu_item_banner->link_video; ?>" class="card-img"
-						   autoplay="autoplay"
-						   muted="muted" loop="loop" style="border-radius: 0rem;">
-					</video>
-				<?php endif; ?>
-
-				<?php endif; ?>
-				<?php if (!empty($wt_custom_menu_item_banner->banner_text)):
-					/**
-					 * @var $wt_custom_menu_item_banner- >banner_text
-					 * Here we output additional text for the banner, where you can
-					 * write slogans, subheadings, etc.
-					 */
-
-					?>
-					<div class="position-absolute bottom-0 left-0 col-12 col-md-6 ps-3 pb-3" style="z-index: 2;">
-						<p class="h2 text-white"><?php echo $wt_custom_menu_item_banner->banner_text; ?></p>
-					</div>
-				<?php endif; ?>
-			</div>
-		</div>
-	</section>
-<?php endif; // if count($wt_custom_menu_item_banner) > 0	?>
 ```
