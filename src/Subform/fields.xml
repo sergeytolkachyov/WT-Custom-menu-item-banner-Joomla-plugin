@@ -52,7 +52,7 @@
                        label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_IMAGE"
                        preview="true"
                        types="images"
-                       showon="media_type:image"/>
+                       showon="use_banner:1[AND]media_type:image"/>
                 <field type="radio"
                        name="is_responsive_images"
                        label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_IS_RESPONSIVE_IMAGES"
