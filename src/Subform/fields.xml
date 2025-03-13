@@ -1,97 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fields name="params">
-		<fields name="wt_custom_menu_item_banner">
-			<fieldset name="wt_custom_menu_item_banner"
-					  label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_FIELDSET_LABEL"
-					  description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_DESC">
-				<field type="text"
-					   name="banner_text"
-					   filter="safehtml"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_TEXT_LABEL"
-					   description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_TEXT_DESC"/>
-				<field type="text"
-					   name="custom_link"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_LINK_TYPE_CUSTOM_LINK"
-					   description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_LINK_TYPE_CUSTOM_LINK_DESC"
-					   filter="safehtml"
-				/>
-				<field type="filelist"
-					   name="pluginlayout"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_PLUGIN_LAYOUT"
-					   description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_PLUGIN_LAYOUT_DESC"
-					   directory="plugins/system/wt_custom_menu_item_banner/tmpl"
-					   fileFilter="php"
-					   stripext="true"
-					   hide_none="true"
-					   hide_default="true"
-				/>
-				<field type="radio"
-					   name="media_type"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_MEDIA_TYPE"
-					   class="btn-group"
-					   default="image">
-					<option value="image">PLG_WT_CUSTOM_MENU_ITEM_BANNER_MEDIA_TYPE_IMAGE</option>
-					<option value="video">PLG_WT_CUSTOM_MENU_ITEM_BANNER_MEDIA_TYPE_VIDEO</option>
-				</field>
-				<field type="media"
-					   name="link_image"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_IMAGE"
-					   preview="true"
-					   types="images"
-					   showon="media_type:image"/>
-				<field type="radio"
-					   name="is_responsive_images"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_IS_RESPONSIVE_IMAGES"
-					   class="btn-group btn-group-yesno"
-					   default="0"
-					   showon="media_type:image">
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field name="responsive_images"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_RESPONSIVE_IMAGES"
-					   type="subform"
-					   layout="joomla.form.field.subform.repeatable-table"
-					   formsource="/plugins/system/wt_custom_menu_item_banner/src/Subform/responsive-images.xml"
-					   multiple="true"
-					   buttons="add,remove"
-					   showon="is_responsive_images:1[AND]media_type:image"
-				/>
-				<field type="radio"
-					   name="is_responsive_videos"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_IS_RESPONSIVE_VIDEOS"
-					   class="btn-group btn-group-yesno"
-					   default="0"
-					   showon="media_type:video">
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field type="media"
-					   name="link_video"
-					   types="videos"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_VIDEO_FILE"
-					   preview="false"
-					   showon="media_type:video[AND]is_responsive_videos:0"/>
+    <fields name="params">
+        <fields name="wt_custom_menu_item_banner">
+            <fieldset name="wt_custom_menu_item_banner"
+                      label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_FIELDSET_LABEL"
+                      description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_DESC">
+                <field name="use_banner"
+                       type="radio"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_USE_BANNER"
+                       default="0"
+                       layout="joomla.form.field.radio.switcher"
+                       filter="boolean">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field type="text"
+                       name="banner_text"
+                       filter="safehtml"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_TEXT_LABEL"
+                       description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_TEXT_DESC"
+                       showon="use_banner:1"/>
+                <field type="text"
+                       name="custom_link"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_LINK_TYPE_CUSTOM_LINK"
+                       description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_LINK_TYPE_CUSTOM_LINK_DESC"
+                       filter="safehtml"
+                       showon="use_banner:1"
+                />
+                <field type="filelist"
+                       name="pluginlayout"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_PLUGIN_LAYOUT"
+                       description="PLG_WT_CUSTOM_MENU_ITEM_BANNER_PLUGIN_LAYOUT_DESC"
+                       directory="plugins/system/wt_custom_menu_item_banner/tmpl"
+                       fileFilter="php"
+                       stripext="true"
+                       hide_none="true"
+                       hide_default="true"
+                       showon="use_banner:1"
+                />
+                <field type="radio"
+                       name="media_type"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_MEDIA_TYPE"
+                       class="btn-group"
+                       default="image"
+                       showon="use_banner:1">
+                    <option value="image">PLG_WT_CUSTOM_MENU_ITEM_BANNER_MEDIA_TYPE_IMAGE</option>
+                    <option value="video">PLG_WT_CUSTOM_MENU_ITEM_BANNER_MEDIA_TYPE_VIDEO</option>
+                </field>
+                <field type="media"
+                       name="link_image"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_IMAGE"
+                       preview="true"
+                       types="images"
+                       showon="media_type:image"/>
+                <field type="radio"
+                       name="is_responsive_images"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_IS_RESPONSIVE_IMAGES"
+                       class="btn-group btn-group-yesno"
+                       default="0"
+                       showon="use_banner:1[AND]media_type:image">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="responsive_images"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_RESPONSIVE_IMAGES"
+                       type="subform"
+                       layout="joomla.form.field.subform.repeatable-table"
+                       formsource="/plugins/system/wt_custom_menu_item_banner/src/Subform/responsive-images.xml"
+                       multiple="true"
+                       buttons="add,remove"
+                       showon="use_banner:1[AND]is_responsive_images:1[AND]media_type:image"
+                />
+                <field type="radio"
+                       name="is_responsive_videos"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_IS_RESPONSIVE_VIDEOS"
+                       class="btn-group btn-group-yesno"
+                       default="0"
+                       showon="use_banner:1[AND]media_type:video">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field type="media"
+                       name="link_video"
+                       types="videos"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_VIDEO_FILE"
+                       preview="false"
+                       showon="use_banner:1[AND]media_type:video[AND]is_responsive_videos:0"/>
 
-				<field type="media"
-					   name="link_video_poster"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_VIDEO_FILE_POSTER"
-					   preview="true"
-					   types="images"
-					   showon="media_type:video[AND]is_responsive_videos:0"/>
-				<field name="responsive_videos"
-					   label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_RESPONSIVE_VIDEOS"
-					   type="subform"
-					   layout="joomla.form.field.subform.repeatable-table"
-					   formsource="/plugins/system/wt_custom_menu_item_banner/src/Subform/responsive-videos.xml"
-					   groupByFieldset="true"
-					   multiple="true"
-					   buttons="add,remove"
-					   showon="is_responsive_videos:1[AND]media_type:video"
-				/>
+                <field type="media"
+                       name="link_video_poster"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_VIDEO_FILE_POSTER"
+                       preview="true"
+                       types="images"
+                       showon="use_banner:1[AND]media_type:video[AND]is_responsive_videos:0"/>
+                <field name="responsive_videos"
+                       label="PLG_WT_CUSTOM_MENU_ITEM_BANNER_RESPONSIVE_VIDEOS"
+                       type="subform"
+                       layout="joomla.form.field.subform.repeatable-table"
+                       formsource="/plugins/system/wt_custom_menu_item_banner/src/Subform/responsive-videos.xml"
+                       groupByFieldset="true"
+                       multiple="true"
+                       buttons="add,remove"
+                       showon="use_banner:1[AND]is_responsive_videos:1[AND]media_type:video"
+                />
 
-			</fieldset>
-		</fields>
-	</fields>
+            </fieldset>
+        </fields>
+    </fields>
 </form>

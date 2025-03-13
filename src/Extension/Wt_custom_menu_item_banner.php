@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    System - WT Custom menu item banner
- * @version       1.2.1
+ * @version       1.2.2
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
  * @copyright     Copyright (C) 2023 Sergey Tolkachyov
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
@@ -10,6 +10,8 @@
 
 namespace Joomla\Plugin\System\Wt_custom_menu_item_banner\Extension;
 
+use Exception;
+use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Factory;
@@ -26,7 +28,7 @@ class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterfac
 	 *
 	 * @return array
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 * @since 4.1.0
 	 *
 	 */
@@ -34,11 +36,11 @@ class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterfac
 	{
 		return [
 			'onContentPrepareForm' => 'onContentPrepareForm',
-			'onBeforeCompileHead' => 'onBeforeCompileHead',
+			'onBeforeCompileHead'  => 'onBeforeCompileHead',
 		];
 	}
 
-	public function onContentPrepareForm($event) : void
+	public function onContentPrepareForm($event): void
 	{
 		$form = $event->getArgument(0);
 		$data = $event->getArgument(1);
@@ -70,10 +72,10 @@ class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterfac
 	/**
 	 * Add a responsive videos data to Joomla script options for frontend
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 * @since 1.0.0
 	 */
-	public function onBeforeCompileHead($event) : void
+	public function onBeforeCompileHead($event): void
 	{
 		$app = $this->getApplication();
 		if (!($app->isClient('site')))
@@ -82,14 +84,15 @@ class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterfac
 		}
 		$doc = $app->getDocument();
 		// We are work only in HTML, not JSON, RSS etc.
-		if (!($doc instanceof \Joomla\CMS\Document\HtmlDocument))
+		if (!($doc instanceof HtmlDocument))
 		{
 			return;
 		}
 
-		try{
+		try
+		{
 			$menu = $app->getMenu()->getActive();
-			if($menu)
+			if ($menu)
 			{
 				$wt_custom_menu_item_banner = $menu->getParams()->get('wt_custom_menu_item_banner');
 				if (!$wt_custom_menu_item_banner)
@@ -107,8 +110,10 @@ class Wt_custom_menu_item_banner extends CMSPlugin implements SubscriberInterfac
 				}
 			}
 
-		} catch (\Exception $e) {
-			Factory::getApplication()->enqueueMessage($e->getMessage(),'error');
+		}
+		catch (Exception $e)
+		{
+			Factory::getApplication()->enqueueMessage($e->getMessage(), 'error');
 		}
 	}
 }
