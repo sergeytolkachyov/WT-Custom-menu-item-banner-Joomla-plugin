@@ -66,5 +66,4 @@ if($wt_custom_menu_item_banner && $useBanner)
         JPATH_SITE.'/plugins/system/wt_custom_menu_item_banner/tmpl'
     );
 }
-
 ```
