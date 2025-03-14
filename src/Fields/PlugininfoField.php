@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    System - WT Custom menu item banner
- * @version       1.2.2
+ * @version       1.2.2.1
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
  * @copyright     Copyright (C) 2022-2024 Sergey Tolkachyov
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
