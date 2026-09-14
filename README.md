@@ -8,6 +8,19 @@ Plugin - does not provide a 1 click solution. You make up the banner output your
 - Responsive both images and videos is supported. For desktops (desktops, laptops, TV), specify the image in horizontal orientation. For mobile devices - vertical.
 - You can specify any number of breakpoints (ranges of screen resolutions for which a particular image or video is used). The CSS syntax of @media queries is used.
 - Lazy loading of video files for adaptive video banners. The Js script checks whether the specified videos correspond to the screen parameters and loads the desired one.
+
+## Responsive video source order
+
+Responsive video rows are checked from top to bottom. The first row whose CSS
+media query matches is used for both the video and its poster. Prefer
+non-overlapping ranges so the result does not depend on overlapping conditions:
+
+1. Mobile portrait video: `(max-width: 991.98px)`
+2. HD landscape video: `(min-width: 992px) and (max-width: 1280px)`
+3. Full HD landscape video: `(min-width: 1281px)`
+
+If you need a row without a media query as a fallback, place it last.
+
 # Preparing images for image banners
 You can specify either one image for the banner, or several different ones. The selection of image sizes for each resolution should be done by the designer. Not necessarily these will be versions of the same image. 
 As an example, for desktop screen resolutions, you can use a horizontal banner with the size of 2880x1200 (1440x600) for FullHD monitors and higher (the ratio is 12:5).

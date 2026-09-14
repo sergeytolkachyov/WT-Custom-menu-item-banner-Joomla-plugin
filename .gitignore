@@ -1,3 +1,8 @@
 .idea
 .packages
 .phing
+.codex/hooks.json
+.pf/
+.secrets/
+*.tmp
+*.bak

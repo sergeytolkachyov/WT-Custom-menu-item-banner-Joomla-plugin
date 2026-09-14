@@ -1,14 +1,15 @@
 <?php
 /**
  * @package    System - WT Custom menu item banner
- * @version       1.2.2.1
+ * @version       1.3.0
  * @Author        Sergey Tolkachyov, https://web-tolk.ru
- * @copyright     Copyright (C) 2022-2024 Sergey Tolkachyov
+ * @copyright     Copyright (c) 2022 - 2026 Sergey Tolkachyov. All rights reserved.
  * @license       GNU/GPL http://www.gnu.org/licenses/gpl-3.0.html
  * @since         1.0.0
  */
 
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Uri\Uri;
 
 defined('_JEXEC') or die;
 
@@ -68,19 +69,60 @@ if ((($wt_custom_menu_item_banner->media_type == 'image' && !empty($wt_custom_me
             ?>
 
             <?php if ($wt_custom_menu_item_banner->is_responsive_videos == 1) :
-            /**
-             * Responsive videos are enabled. That's why
-             * poster and src attributes are empty. They will be filled by js script.
-             */
+                $responsive_video_posters = [];
+                $site_root                = rtrim(Uri::root(true), '/');
 
-            ?>
+                foreach ((array) $wt_custom_menu_item_banner->responsive_videos as $responsive_video)
+                {
+                    if (empty($responsive_video->link_video_poster) || empty($responsive_video->video))
+                    {
+                        continue;
+                    }
+
+                    $clean_poster = HTMLHelper::cleanImageURL($responsive_video->link_video_poster);
+                    $poster_url   = $clean_poster->url;
+
+                    if (!preg_match('#^(?:[a-z][a-z0-9+.-]*:)?//#i', $poster_url) && substr($poster_url, 0, 1) !== '/')
+                    {
+                        $poster_url = $site_root . '/' . ltrim($poster_url, '/');
+                    }
+
+                    $responsive_video_posters[] = [
+                        'url'         => $poster_url,
+                        'media_query' => $responsive_video->media_query ?? '',
+                        'attributes'  => (array) $clean_poster->attributes,
+                    ];
+                }
+
+                $fallback_poster = !empty($responsive_video_posters) ? end($responsive_video_posters) : null;
+                ?>
             <video id="wt-custom-menu-item-banner-responsive-video"
-                   poster="/"
-                   src="/"
-                   class="card-img"
-                   autoplay="autoplay"
-                   muted="muted" loop="loop">
+                   class="card-img rounded-0<?php echo $fallback_poster ? ' position-absolute top-0 start-0 w-100 h-100 object-fit-cover' : ''; ?>"
+                   preload="none"
+                   autoplay
+                   muted
+                   loop
+                   playsinline
+                   aria-hidden="true">
             </video>
+            <?php if ($fallback_poster) : ?>
+                <picture id="wt-custom-menu-item-banner-responsive-video-poster"
+                         class="d-block position-relative"
+                         aria-hidden="true">
+                    <?php foreach ($responsive_video_posters as $responsive_video_poster) : ?>
+                        <source srcset="<?php echo htmlspecialchars($responsive_video_poster['url'], ENT_QUOTES, 'UTF-8'); ?>"
+                                <?php echo !empty($responsive_video_poster['media_query']) ? 'media="' . htmlspecialchars($responsive_video_poster['media_query'], ENT_QUOTES, 'UTF-8') . '"' : ''; ?>>
+                    <?php endforeach; ?>
+                    <img src="<?php echo htmlspecialchars($fallback_poster['url'], ENT_QUOTES, 'UTF-8'); ?>"
+                         alt=""
+                         class="card-img w-100 h-auto rounded-0"
+                         loading="eager"
+                         fetchpriority="high"
+                         draggable="false"
+                         <?php echo !empty($fallback_poster['attributes']['width']) ? 'width="' . (int) $fallback_poster['attributes']['width'] . '"' : ''; ?>
+                         <?php echo !empty($fallback_poster['attributes']['height']) ? 'height="' . (int) $fallback_poster['attributes']['height'] . '"' : ''; ?>>
+                </picture>
+            <?php endif; ?>
         <?php else :
             /**
              * Responsive videos are disabled. Just render <video>.
@@ -88,8 +130,8 @@ if ((($wt_custom_menu_item_banner->media_type == 'image' && !empty($wt_custom_me
             ?>
             <video id="wt-custom-menu-item-banner-responsive-video" <?php echo($wt_custom_menu_item_banner->link_video_poster ? 'poster="' . $wt_custom_menu_item_banner->link_video_poster . '"' : ''); ?>
                    src="/<?php echo $wt_custom_menu_item_banner->link_video; ?>" class="card-img rounded-0"
-                   autoplay="autoplay"
-                   muted="muted" loop="loop">
+                   autoplay
+                   muted loop playsinline aria-hidden="true">
             </video>
         <?php endif; ?>
 
